@@ -10,7 +10,6 @@ const TaskTable = () => {
     const [filter, setFilter] = useState('all');
     const { currentUser } = useContext(AuthContext);
     
-    // State for Add Task modal
     const [modalOpen, setModalOpen] = useState(false);
     const [newTask, setNewTask] = useState({
         title: '',
@@ -18,7 +17,6 @@ const TaskTable = () => {
         priority: 'low',
     });
 
-    // State for Edit Task modal
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [editingTask, setEditingTask] = useState(null);
 
@@ -115,8 +113,9 @@ const TaskTable = () => {
                 <Table.Head>
                     <Table.HeadCell>Title</Table.HeadCell>
                     <Table.HeadCell>Description</Table.HeadCell>
+                    <Table.HeadCell>Priority</Table.HeadCell>
                     <Table.HeadCell>Done</Table.HeadCell>
-                    <Table.HeadCell>Completion Time</Table.HeadCell>
+                    <Table.HeadCell>Completion Info</Table.HeadCell> {/* Updated header */}
                     <Table.HeadCell>Action</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
@@ -125,6 +124,7 @@ const TaskTable = () => {
                             <Table.Row key={task.id} className="hover:bg-gray-100">
                                 <Table.Cell>{task.title}</Table.Cell>
                                 <Table.Cell>{task.description}</Table.Cell>
+                                <Table.Cell>{task.priority}</Table.Cell>
                                 <Table.Cell>
                                     <Checkbox
                                         checked={task.isCompleted}
@@ -132,21 +132,26 @@ const TaskTable = () => {
                                     />
                                 </Table.Cell>
                                 <Table.Cell>
-                                    {task.completedAt ? new Date(task.completedAt).toLocaleString() : 'Not completed yet'}
+                                    <div className="flex flex-col"> {/* Completion time displayed vertically */}
+                                        <span>{task.isCompleted ? 'Completed' : 'Not completed'}</span>
+                                        <span>{task.completedAt ? new Date(task.completedAt).toLocaleString() : 'N/A'}</span>
+                                    </div>
                                 </Table.Cell>
                                 <Table.Cell>
-                                    <Button onClick={() => handleDelete(task.id)} color="failure">
-                                        Delete
-                                    </Button>
-                                    <Button onClick={() => openEditModal(task)} color="gray" className="ml-2">
-                                        Edit
-                                    </Button>
+                                    <div className="flex flex-col space-y-2"> {/* Delete and Edit buttons separated */}
+                                        <Button onClick={() => openEditModal(task)} color="gray">
+                                            Edit
+                                        </Button>
+                                        <Button onClick={() => handleDelete(task.id)} color="failure">
+                                            Delete
+                                        </Button>
+                                    </div>
                                 </Table.Cell>
                             </Table.Row>
                         ))
                     ) : (
                         <Table.Row>
-                            <Table.Cell colSpan="5" className="text-center">No tasks found</Table.Cell>
+                            <Table.Cell colSpan="6" className="text-center">No tasks found</Table.Cell>
                         </Table.Row>
                     )}
                 </Table.Body>

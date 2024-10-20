@@ -25,18 +25,23 @@ export const NavbarComponent = () => {
       <Navbar.Brand href="/">
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">TaskItUp</span>
       </Navbar.Brand>
-      <div className="flex md:order-2">
+            <div className="flex md:order-2">
         {currentUser ? (
           <Dropdown
             arrowIcon={false}
             inline
-            
+            label={
+              <Avatar
+                alt={currentUser.username}
+                img={currentUser.avatar || 'https://res.cloudinary.com/dspicjwkq/image/upload/v1714633803/avatars/ipqcc2oqfooliph7fzbb.jpg'}
+                rounded
+              />
+            }
           >
             <Dropdown.Header>
-              <span className="block text-sm">{currentUser.name}</span>
+              <span className="block text-sm">{currentUser.username}</span>
               <span className="block truncate text-sm font-medium">{currentUser.email}</span>
             </Dropdown.Header>
-            <Dropdown.Item href="/dashboard">Dashboard</Dropdown.Item>
             {/* Add more dropdown items as needed */}
             <Dropdown.Divider />
             <Dropdown.Item onClick={handleLogout}>Sign out</Dropdown.Item>
