@@ -106,6 +106,7 @@ const TaskTable = () => {
                     <option value="all">All Tasks</option>
                     <option value="completed">Completed</option>
                     <option value="not_completed">Not Completed</option>
+                    <option value="priority">Priority</option>
                 </select>
                 <Button onClick={() => setModalOpen(true)} color="success">Add Task</Button>
             </div>
