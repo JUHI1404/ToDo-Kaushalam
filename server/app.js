@@ -10,6 +10,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/api', taskRoutes);
 app.use("/api/auth", authRoute);
+app.get("/", (req, res) => {
+    res.send(`
+      <h1>Let's Get More Productive!</h1>
+      `);
+    });
 
 app.listen(8800, () => {
     console.log("Server is running!");

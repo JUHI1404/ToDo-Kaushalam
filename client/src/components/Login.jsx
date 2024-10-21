@@ -39,6 +39,12 @@ export function Login({ openModal, setOpenModal }) {
     }
   };
 
+  const handleSignUpRedirect = () => {
+    onCloseModal();  
+    navigate("/signup");  
+  };
+
+
   return (
     <>
       <Modal show={openModal} size="md" onClose={onCloseModal} popup>

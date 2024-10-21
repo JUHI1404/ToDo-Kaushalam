@@ -12,27 +12,19 @@ export const SignUp = () => {
         password: '',
         username: '',
         phoneNumber: '',
-        jobTitle: '',
-        department: '',
-        location: '',
-        shortBio: '',
-        avatar: null,
+       
     });
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
     const { currentUser, updateUser } = useContext(AuthContext);
-    const [avatar, setAvatar] = useState([]);
+    // const [avatar, setAvatar] = useState([]);
     useEffect(() => {
         if (currentUser) {
             setFormData({
                 email: currentUser.email,
                 username: currentUser.username,
                 phoneNumber: currentUser.phoneNumber,
-                jobTitle: currentUser.jobTitle,
-                department: currentUser.department,
-                location: currentUser.location,
-                shortBio: currentUser.shortBio,
-                avatar: avatar[0], 
+                
             });
         }
     }, [currentUser]);
